@@ -87,6 +87,7 @@ def searchbypostname(request):
         messages.error(request,'No posts have been found')
         return redirect('/awareness')
 
+
   
 # def home(request):
 #     posts = Post.objects.all()

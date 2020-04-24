@@ -74,26 +74,33 @@ def viewReplies(request,post_id):
 
 
 @api_view(['POST'])
-def upvote(request,answer_id):
-    try:
-        answer = Answer.objects.get(id = answer_id)
-    except ObjectDoesNotExist:
-        return JsonResponse("No Replies with this id")    
-    if answer:
-        answer.upvote+=1
-        answer.save()
-        return JsonResponse('Upvote Placed Successfully',safe = False)
-    return JsonResponse('No answers with the matching id',safe = False)    
+def upvote(request,token,answer_id):
+    if checkValidToken(token):
+        try:
+            answer = Answer.objects.get(id = answer_id)
+        except ObjectDoesNotExist:
+            return JsonResponse("No Replies with this id")    
+        if answer:
+            answer.upvote+=1
+            answer.save()
+            return JsonResponse('Upvote Placed Successfully',safe = False)
+        return JsonResponse('No answers with the matching id',safe = False) 
+    else:
+        return JsonResponse(' Correct Authentication Token was not provided',safe  = False)
+
 
 
 @api_view(['POST'])
-def downvote(request, answer_id):
-    try:
-        answer = Answer.objects.get(id=answer_id)
-    except ObjectDoesNotExist:
-        return JsonResponse("No Replies with this id")
-    if answer:
-        answer.downvote += 1
-        answer.save()
-        return JsonResponse('Downvote Placed Successfully', safe=False)
-    return JsonResponse('No answers with the matching id', safe=False)
+def downvote(request,token,answer_id):
+    if checkValidToken(token):
+        try:
+            answer = Answer.objects.get(id=answer_id)
+        except ObjectDoesNotExist:
+            return JsonResponse("No Replies with this id")
+        if answer:
+            answer.downvote += 1
+            answer.save()
+            return JsonResponse('Downvote Placed Successfully', safe=False)
+        return JsonResponse('No answers with the matching id', safe=False)
+    else:
+        return JsonResponse(' Correct Authentication Token was not provided', safe=False)

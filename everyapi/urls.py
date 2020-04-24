@@ -11,6 +11,6 @@ urlpatterns = [
     path('filter_by_name/<name>/',filterpost_by_name),
     path('answerpost/<token>/<post_id>/',giveAnswer),
     path('viewreplies/<post_id>/',viewReplies),
-    path('upvote/<answer_id>/',upvote),
-    path('downvote/<answer_id>/',downvote),
+    path('upvote/<token>/<answer_id>/',upvote),
+    path('downvote/<token>/<answer_id>/', downvote),
 ]
