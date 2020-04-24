@@ -1,0 +1,14 @@
+{% include 'socialdistancing/header.html' %}    
+{% if messages %}
+{% for message in messages %}
+<div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}" role="alert">{{ message }}</div>
+{% endfor %}
+{% endif %}
+<form method='POST'>
+    {% csrf_token %}
+    <input type="time" name="expected_going_time" id="">    <label for="">Enter Your Expected Time of reaching</label> <br> <br>
+    <input type="time" name="expected_leaving_time" id=""> <label for="">Enter Your Expected Time of leaving</label> <br> <br>
+    <input type="submit" value="Place">
+</form>
+
+{% include 'socialdistancing/footer.html' %}

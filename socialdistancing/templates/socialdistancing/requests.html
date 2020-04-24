@@ -1,0 +1,17 @@
+{% include 'socialdistancing/header.html' %}    
+{% if requests %}
+<hr>
+    {% for re in requests %}
+
+<hr>
+    <h2>Expected Going Time:-{{re.expected_going_time}} </h2>
+    <h2> Expected Leaving Time :-{{re.expected_leaving_time}} </h2>
+    <h2>{{re.shop_name.shop_name}}</h2>
+    <a href='delete/{{re.id}}/'>Delete</a>
+{% endfor %}
+{% else %}
+You have not placed any requests
+{% endif %}
+<hr>
+
+{% include 'socialdistancing/footer.html' %}

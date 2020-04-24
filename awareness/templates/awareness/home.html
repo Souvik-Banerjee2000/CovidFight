@@ -1,0 +1,44 @@
+{% include 'awareness/header.html' %}
+
+<body>
+{%  for message in messages %}
+<h1> {{message}} </h1>
+{% endfor %}
+<div class="container">
+<hr>
+    <h1>Ask Your question by putting up a question in the platform</h1>
+<form method="POST" action='createpost/' >
+    {% csrf_token %}
+    <input type="text" name="title" id="" placeholder='Enter Question title' class="search-box"> <label for="">Enter title</label> <br> <br>
+    <input type="text" name="description" id="" placeholder="Enter Question  Description" class="search-box"> <label for="">Enter Description</label> <br> <br>
+    <input type="submit" value="Submit" class="btnn1">
+    <hr>
+</form>
+</div>
+<form action='searchbypostname/' method="GET">
+    <input type="text" name='postname' placeholder='Searchbypostname' class="search-box"> <label> Enter post name</label>
+    <input type="submit" class="btnn2" value="S" >
+</form>
+
+<div class="container">
+    <div class="post">
+        {% for post in posts %}
+        <hr>
+        <h2> Title of the post is:- <i><u>{{post.title}}</u></i></h2> 
+        <h2> Description of the post is <i><u>{{post.description}}</u></i></h2> 
+        <h2> Posted by:-  <i><u>{{post.user.user.username}}</u></i></h2> 
+        <a href="answer/{{post.id}}/" class="btn1">Answer this post</a>
+        <a href="viewreply/{{post.id}}/" class="btn2"> View Replies <a>
+        {% endfor %} 
+    </div>
+</div>
+
+
+
+<hr>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+  </html>

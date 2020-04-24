@@ -1,0 +1,10 @@
+{% for post in posts %}
+<hr>
+<h2> Title of the post is:- <i><u>{{post.title}}</u></i></h2> 
+ <h2> Description of the post is <i><u>{{post.description}}</u></i></h2> 
+<h2> Posted by:-  <i><u>{{post.user.user.username}}</u></i></h2> 
+<a href="answer/{{post.id}}/">Answer this post</a>
+<a href="viewreply/{{post.id}}/"> View Replies <a>
+{% endfor %} 
+
+<hr>

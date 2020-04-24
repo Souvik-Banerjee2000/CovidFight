@@ -1,0 +1,13 @@
+{% include 'awareness/header.html' %}
+
+<div class="container" >
+    <div class="post" >
+    {% for reply in replies %}
+    <h2> {{reply.reply}} <br> it got {{reply.upvote}} no of upvotes and <br> {{reply.downvote}} no of downvotes <h2>
+
+    <button class="btnn3"><a href="upvote/{{reply.id}}/"> <i class="fa fa-thumbs-up" aria-hidden="true"></i><a></button>
+    <button class="btnn4"><a href="downvote/{{reply.id}}/"> <i class="fa fa-thumbs-down" aria-hidden="true"></i></a></button>
+    {% endfor %}
+    </div>
+</div>
+{% include 'awareness/footer.html' %}

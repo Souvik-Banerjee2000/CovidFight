@@ -1,0 +1,13 @@
+{% include 'socialdistancing/header.html' %}    
+{% for shop in shops %}
+
+		<h1> Shop Name :- <a href = "changeshopdetails/{{shop.id}}/" > {{shop.shop_name}} </a> </h1>
+        <h2> Shop Location:-  {{shop.location}} </h2>
+        <h2> Opening Time:- {{shop.opening_time}} </h2>
+        <h2> Closing Time:- {{shop.closing_time}} </h2>
+        <h2> Type :- {{shop.shop_type}} </h2>
+        <a href="viewrequests/{{shop.id}}/" > See All Requests </a>
+        
+{% endfor %}        
+
+{% include 'socialdistancing/footer.html' %}

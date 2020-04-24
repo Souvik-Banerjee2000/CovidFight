@@ -1,0 +1,27 @@
+{% include 'socialdistancing/header.html' %}    
+{% for re in requests %}
+<hr>
+<h1> Requested By -  {{re.placer.user.username}} </h1>
+<h2> The Expected Reaching Time is {{re.expected_going_time}} </h2>
+<h2> The expected Leaving time is:- {{re.expected_leaving_time}}</h2>
+
+<form action= "accept_or_decline/{{re.id}}/" method="POST"> 
+
+ {% csrf_token %} 
+<input type = "radio" name="accept_or_declined" value="accepted"> <label> Accept </label>  <br> <br>
+
+<input type = "radio" name="accept_or_declined" value="declined"> <label> Decline </label>  <br> <br>
+
+<input  type = "text" name="message" placeholder= 'Enter your message for the request placer' >  <br> <br>
+<input type="submit" value="Submit">
+
+
+
+</form>
+
+
+ <br> <br>
+{% endfor %}
+<hr>
+
+{% include 'socialdistancing/footer.html' %}

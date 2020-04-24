@@ -1,0 +1,30 @@
+{% include 'socialdistancing/header.html' %}    
+{% if messages %}
+{% for message in messages %}
+<div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}" role="alert">{{ message }}</div>
+{% endfor %}
+{% endif %}
+
+{% if flag %}
+    <form method='POST' >
+        {% csrf_token %}
+        <input type="text"  name="shop_name"      placeholder = "Enter your shop name"> <br> <br> <br>
+        <input type="time"  name="opening_time"   placeholder= "Enter Your Shop's Opening time"> <br> <br> <br>
+        <input type="time"  name="closing_time"   placeholder="Enter Your Shop's Closing time"> <br> <br> <br>
+        <input type="text"  name="location"       placeholder='Enter your location' id=""> <br> <br> <br>
+        <input type="radio" name="shop_type"      value="Grocery" id=""> Grocery <br> <br> <br>
+        <input type="radio" name="shop_type"      value="Medical-Store" id=""> Medical-Store <br> <br> <br>
+        <input type="radio" name="shop_type"      value="Food" id=""> Food <br> <br> <br>
+        <input type="submit" value="Submit">
+    </form>
+
+{% else %}
+    <form  method='POST'>
+        {% csrf_token %}
+        <input type="time"  name="opening_time"   placeholder= "Enter Your Shop's Opening time">  <label for="">Enter Your Shop's opening Time</label> <br> <br> 
+        <input type="time"  name="closing_time"   placeholder="Enter Your Shop's Closing time">  <label for="">Enter Your Shop's closing Time</label>
+    <br> <br> <br>    <input type="submit" value="Submit">
+    </form>
+{% endif %}
+
+{% include 'socialdistancing/footer.html' %}
