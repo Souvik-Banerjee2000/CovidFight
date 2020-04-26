@@ -6,6 +6,7 @@ from django.contrib.auth.models import User,auth
 from django.contrib import messages
 from django.core.exceptions import ObjectDoesNotExist
 from .decoraters import unauthenticated_user
+from rest_framework.authtoken.models import Token
 # Create your views here.
 
 
@@ -26,6 +27,7 @@ def register(request):
             user = User(username = username,password = password,email = email)
             user.set_password(request.POST['password'])
             user.save()
+            Token.objects.get_or_create(user = user)
             auth.login(request,user)
             user_id = user.id
             return HttpResponseRedirect(reverse('usertype', args=(user_id,)))
@@ -43,7 +45,7 @@ def usertype(request,id):
     else:
         if request.user.is_authenticated:
             user_id = int(id)
-            print(user_id)
+            # print(user_id)
             user = User.objects.get(id = user_id)
             try:
                 user_prof = UserProfile.objects.get(user = user)
