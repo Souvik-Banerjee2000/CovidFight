@@ -45,7 +45,7 @@ def save(request,opening_time,closing_time,location,shop_name,shop_type):
 		return redirect('/createshop')
 	else:
 		opening_hour = refractorHour(opening_time)
-		opening_minute = refractorMinute(opening_minute)
+		opening_minute = refractorMinute(opening_time)
 		closing_hour = refractorHour(closing_time)
 		closing_minute = refractorMinute(closing_time)
 		user = request.user
