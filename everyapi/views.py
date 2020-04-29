@@ -6,16 +6,17 @@ from rest_framework.decorators import api_view
 from django.http import JsonResponse
 from rest_framework.parsers import JSONParser
 from usermanagement.models import UserProfile
-from werkzeug.security import safe_str_cmp
-
+from django.contrib.auth.models import User,auth
 
 
 @api_view(['POST'])
 def tokenGenerator(request):
     if request.method == 'POST':
         data = JSONParser().parse(request)
-        user = User.objects.get(username=data['username'])
-        if user and safe_str_cmp(data['password'], user.password):
+        user = auth.authenticate(username = data['username'],password = data['password'])
+        # print(user.password + "\n" + data['password'])
+        # print("\n"+ str(safe_str_cmp(user.password,data['password'])))
+        if user:
             token = list(Token.objects.get_or_create(user=user))
             return JsonResponse(token[0].key, status=201, safe=False)
         msg = 'Invalid Credentials'
@@ -32,12 +33,14 @@ def userList(request):
 
     elif request.method == 'POST':
         data = JSONParser().parse(request)
-        serializer = UserSerializer(data=data)
-        if serializer.is_valid():
-            serializer.save()
-            return JsonResponse(serializer.data, status=201)
-        return JsonResponse(serializer.errors, status=400)
-
+        if User.objects.filter(username = data['username']).exists():
+            return JsonResponse('Username Already exists',safe = False)
+        if User.objects.filter(email = data['email']).exists():
+            return JsonResponse('Email Exists',safe = False) 
+        user = User(username = data['username'],password = data['password'],email = data['email'])
+        user.set_password(data['password'])
+        user.save()       
+        return JsonResponse(data,safe = False)
 
 @api_view(['POST'])
 def userProfileList(request,token):

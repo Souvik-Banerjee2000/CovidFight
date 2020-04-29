@@ -6,20 +6,20 @@ from socialdistancing.models import *
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['id','username','email','password']
+        fields = '__all__'    
 
 
 
 class PostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
-        fields = ['id','user','title','description'] 
+        fields = '__all__' 
 
 
 class AnswerSerialier(serializers.ModelSerializer):
     class Meta:
         model = Answer
-        fields = ['id','user','upvote','downvote','post','reply']               
+        fields = '__all__'             
 
 
 class ShopSerializer(serializers.ModelSerializer):
