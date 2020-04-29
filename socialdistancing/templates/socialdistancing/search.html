@@ -1,14 +1,20 @@
 
 {% include 'socialdistancing/header.html' %}
-{% for shop in shops %}
-    <hr>
-        <h1>{{shop.shop_name}}</h1>
-        <h1> Owner Name :-  {{shop.owner.user.username}} </h1>
-        <h2> Shop Location:-  {{shop.location}} </h2>
-        <h2> Opening Time:- {{shop.opening_time}} </h2>
-        <h2> Closing Time:- {{shop.closing_time}} </h2>
-        <h2> Type :- {{shop.shop_type}} </h2>
-         <a href="placerequest/{{shop.id}}/"> PlaceRequest </a>
-{% endfor %}
+{% if shops %}
+    {% for shop in shops %}
+        <hr>
+            <h1>{{shop.shop_name}}</h1>
+            <h1> Owner Name :-  {{shop.owner.user.username}} </h1>
+            <h2> Shop Location:-  {{shop.location}} </h2>
+            <h2> Opening Time:- {{shop.opening_time}} </h2>
+            <h2> Closing Time:- {{shop.closing_time}} </h2>
+            <h2> Type :- {{shop.shop_type}} </h2>
+            <a href="placerequest/{{shop.id}}/"> PlaceRequest </a>
+    {% endfor %}
+
+{% else %}
+    No shops have been found with this matching query
+{% endif %}
+
 <hr>
 {% include 'socialdistancing/footer.html' %}

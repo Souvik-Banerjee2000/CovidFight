@@ -26,7 +26,7 @@ def checkHour(passed_time): #if the hour is invalid returns true
 
 def checkMinute(passed_time): #IF the nimute is invalid returns true
 	if refractorMinute(passed_time) > 60:
-		return True 
+		return True
 	return False
 
 

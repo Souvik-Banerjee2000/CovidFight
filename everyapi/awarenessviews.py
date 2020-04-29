@@ -7,7 +7,6 @@ from rest_framework.parsers import JSONParser
 from rest_framework.authtoken.models import Token
 from .utils import checkDoctor,checkValidToken
 from rest_framework import status
-
 from django.core.exceptions import ObjectDoesNotExist
 
 @api_view(['GET'],)

@@ -55,7 +55,7 @@ def updateshop(request):
     user = request.user
     user_prof = UserProfile.objects.get(user = user)
     shops = Shop.objects.filter(owner = user_prof)
-    print(shops)
+    # print(shops)
     return render(request,'socialdistancing/currentshops.html',context= {'shops':shops})
 
 
@@ -97,7 +97,9 @@ def placeRequest(request,id):
 
         
 @isShopkeeper
-def seeallRequests(request,id):
+# To see all the requests have been placed to a particular shop
+def seeallRequests(request, id):
+
     user_prof = UserProfile.objects.get(user = request.user)
     shop = Shop.objects.get(owner = user_prof)
     re = Request.objects.filter(shop_name = shop)
@@ -112,11 +114,11 @@ def accept_or_decline(request, id, pk):
     if request.method =="POST":
         re = Request.objects.get(pk = pk)
         user = re.placer
-        print(str(user))
+        # print(str(user))
         accept_or_declined = request.POST['accept_or_declined']
         message = request.POST['message']
-        status = True if accept_or_declined == 'declined' else False
-        Notifiaction.objects.create(user_prof = user,status = True,message = message)
+        status = True if accept_or_declined == 'accepted' else False
+        Notifiaction.objects.create(user_prof = user,status = status,message = message)
         re.delete()
         return redirect('/socialdistancing')
 
@@ -152,6 +154,8 @@ def delete_users_requests(request,id):
         messages.error(request,'You should try to delete your own request' )   
         return redirect('/socialdistancing')
 
+
+@login_required
 def delete_notifications(request,id):
     no = Notifiaction.objects.get(id = id)
     if no.user_prof.user == request.user:

@@ -22,7 +22,7 @@ def register(request):
         if User.objects.filter(username = username).exists():
             messages.info(request, 'Usename Taken')
         elif User.objects.filter(email = email).exists():
-            messages.info('Email Already in use Try choosing a Different one')  
+            messages.info(request,'Email Already in use Try choosing a Different one')  
         else:
             user = User(username = username,password = password,email = email)
             user.set_password(request.POST['password'])

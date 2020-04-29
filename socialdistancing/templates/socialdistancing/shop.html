@@ -9,8 +9,10 @@
     <form method='POST' >
         {% csrf_token %}
         <input type="text"  name="shop_name"      placeholder = "Enter your shop name"> <br> <br> <br>
-        <input type="time"  name="opening_time"   placeholder= "Enter Your Shop's Opening time"> <br> <br> <br>
-        <input type="time"  name="closing_time"   placeholder="Enter Your Shop's Closing time"> <br> <br> <br>
+        <input type="time"  name="opening_time"   placeholder= "Enter Your Shop's Opening time"> 
+        <label>Enter Your Shop's Opening time</label> <br> <br> <br>
+        <input type="time"  name="closing_time"   placeholder="Enter Your Shop's Closing time"> 
+        <label>Enter your shop's closing time</label> <br> <br> <br>
         <input type="text"  name="location"       placeholder='Enter your location' id=""> <br> <br> <br>
         <input type="radio" name="shop_type"      value="Grocery" id=""> Grocery <br> <br> <br>
         <input type="radio" name="shop_type"      value="Medical-Store" id=""> Medical-Store <br> <br> <br>

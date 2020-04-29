@@ -4,11 +4,12 @@
     {% for notification in notifications %}
         {% if notification.status %} 
             Request Accepted <br>
-            <a href="delete/{{notification.id}}/" >Delete</a>
+            
         {% else %}
             Request has been declined
         {% endif %}
     <h2> Message from the shop owner is:- {{notification.message}} </h2> <br>
+    <a href="delete/{{notification.id}}/" >Delete</a>
 <hr>
     {% endfor %}
 {% else %}
