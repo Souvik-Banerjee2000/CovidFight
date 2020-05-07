@@ -40,18 +40,9 @@ def userList(request):
         user = User(username = data['username'],password = data['password'],email = data['email'])
         user.set_password(data['password'])
         user.save()       
-        return JsonResponse(data,safe = False)
+        token = list(Token.objects.get_or_create(user = user))
+        if data['user_type'] is None:
+            return JsonResponse('User_Type Must Be Provided')
+        user_prof = UserProfile.objects.create(user = user,user_type = data['user_type'])
+        return JsonResponse(token[0].key,status = 201,safe = False)
 
-@api_view(['POST'])
-def userProfileList(request,token):
-    if request.method == 'POST':
-        data = JSONParser().parse(request)
-        user = Token.objects.get(key=str(token)).user
-        if user:
-            user_prof = UserProfile.objects.get_or_create(user = user,user_type = data['user_type'])
-            return JsonResponse('saved', status=201,safe=False)
-        msg = 'Invalid Credentials'
-        return JsonResponse(msg, status=status.HTTP_404_NOT_FOUND, safe=False)    
-
-
-    
