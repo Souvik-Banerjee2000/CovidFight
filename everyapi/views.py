@@ -18,9 +18,12 @@ def tokenGenerator(request):
         # print("\n"+ str(safe_str_cmp(user.password,data['password'])))
         if user:
             token = list(Token.objects.get_or_create(user=user))
-            return JsonResponse(token[0].key, status=201, safe=False)
-        msg = 'Invalid Credentials'
-        return JsonResponse(msg, status=status.HTTP_404_NOT_FOUND, safe=False)
+            response_data ={
+                'token':token[0].key,
+                
+            }
+            return JsonResponse(response_data, status=201, safe=False)
+        return JsonResponse({'msg':'Invalid Credentials'}, status=status.HTTP_404_NOT_FOUND, safe=False)
 
 
 @api_view(['GET','POST'])
@@ -34,15 +37,18 @@ def userList(request):
     elif request.method == 'POST':
         data = JSONParser().parse(request)
         if User.objects.filter(username = data['username']).exists():
-            return JsonResponse('Username Already exists',safe = False)
+            return JsonResponse({'msg':'Username Already exists'},safe = False)
         if User.objects.filter(email = data['email']).exists():
-            return JsonResponse('Email Exists',safe = False) 
+            return JsonResponse({'msg':'Email Exists'},safe = False) 
         user = User(username = data['username'],password = data['password'],email = data['email'])
         user.set_password(data['password'])
         user.save()       
         token = list(Token.objects.get_or_create(user = user))
         if data['user_type'] is None:
-            return JsonResponse('User_Type Must Be Provided')
+            return JsonResponse({'msg':'User_Type Must Be Provided'})
         user_prof = UserProfile.objects.create(user = user,user_type = data['user_type'])
-        return JsonResponse(token[0].key,status = 201,safe = False)
+        response_data = {
+            'token':token[0].key,
+        }
+        return JsonResponse(response_data,status = 201,safe =False)
 

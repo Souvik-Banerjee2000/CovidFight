@@ -21,7 +21,7 @@ def searchbyLocation(request,location):
     try:
         shops = Shop.objects.filter(location__icontains = location)
     except ObjectDoesNotExist:
-        return JsonResponse('No shops in this location',safe  = False)
+        return JsonResponse({'msg':'No shops in this location'},safe  = False)
 
     serializer = ShopSerializer(shops, many = True)
     return JsonResponse(serializer.data,safe=False)
@@ -31,7 +31,7 @@ def searchbyName(request,name):
     try:
         shops = Shop.objects.filter(shop_name__icontains = name)
     except ObjectDoesNotExist:
-        return JsonResponse('No shops with this name',safe  = False)    
+        return JsonResponse({'msg':'No shops with this name'},safe  = False)    
     seirializer = ShopSerializer(shops,many = True)
     return JsonResponse(seirializer.data,safe = False)
 
@@ -41,7 +41,7 @@ def searchbyType(request,type):
     try:
         shops = Shop.objects.filter(shop_type__icontains=type)
     except ObjectDoesNotExist:
-        return JsonResponse('No shops in this location',safe  = False)
+        return JsonResponse({'msg':'No shops in this location'},safe  = False)
     seirializer = ShopSerializer(shops, many=True)
     return JsonResponse(seirializer.data, safe=False)
 
@@ -54,9 +54,9 @@ def createShop(request,token):
         if checkShopkeeper(user_prof):
             data = JSONParser().parse(request)
             msg = save(user_prof,data['shop_name'],data['location'],data['shop_type'],data['closing_time'],data['opening_time'])
-            return JsonResponse(msg,safe=False)
-        return JsonResponse('Only Shopkeepers can create shops',safe = False)   
-    return JsonResponse('Invalid Token Provided',safe = False)             
+            return JsonResponse({'msg':msg},safe=False)
+        return JsonResponse({'msg':'Only Shopkeepers can create shops'},safe = False)   
+    return JsonResponse({'msg':'Invalid Token Provided'},safe = False)             
 
 
 @api_view(['POST'],)
@@ -68,10 +68,10 @@ def placeRequest(request,token,shop_id):
         if shop.owner != user_prof:
             data = JSONParser().parse(request)
             msg = saveRequest(user_prof,shop_id,data['expected_going_time'],data['expected_leaving_time'])
-            return JsonResponse(msg,safe = False)
+            return JsonResponse({'msg':msg},safe = False)
         else:
-            return JsonResponse('Why you are trying to place requests to your own shop',safe = False)    
-    return JsonResponse('Invalid token provided',safe=False)    
+            return JsonResponse({'msg':'Why you are trying to place requests to your own shop'},safe = False)    
+    return JsonResponse({'msg':'Invalid token provided'},safe=False)    
 
 @api_view(['GET'],)
 def seeallShops(request,token):
@@ -80,7 +80,7 @@ def seeallShops(request,token):
         shops = Shop.objects.filter(owner = user_prof)
         serializer = ShopSerializer(shops,many = True)
         return JsonResponse(serializer.data,safe = False)
-    return JsonResponse('you are not a shopkeeper',safe = False)    
+    return JsonResponse({'msg':'you are not a shopkeeper'},safe = False)    
 
 
 
@@ -95,8 +95,8 @@ def seeallRequests(request,token,shop_id):
             serializer = RequestSerializer(re,many = True) #Returns Empty array if any requests have not been placed yet in this shop
             return JsonResponse(serializer.data,safe = False)
         else:
-            return JsonResponse('You are not the owner of this particular shop',safe = False)    
-    return JsonResponse('You are not a shopkeeper',safe = False)    
+            return JsonResponse({'msg':'You are not the owner of this particular shop'},safe = False)    
+    return JsonResponse({'msg':'You are not a shopkeeper'},safe = False)    
 
 @api_view(['POST'])
 def accept_or_decline(request,token,shop_id,request_id):
@@ -111,9 +111,12 @@ def accept_or_decline(request,token,shop_id,request_id):
             status = True if data['status'] == 'accepted' else False
             no = Notifiaction.objects.create(user_prof = placer,status = status,message = data['message'])    
             re.delete()
-            return JsonResponse(data['status'],safe = False)
-        return JsonResponse('You are trying to access a shop which is not yours',safe = False)
-    return JsonResponse('You are not a shopkeeper',safe = False)        
+            response_data = {
+                'msg':data['status']
+            }
+            return JsonResponse(response_data,safe = False)
+        return JsonResponse({'msg':'You are trying to access a shop which is not yours'},safe = False)
+    return JsonResponse({'msg':'You are not a shopkeeper'},safe = False)        
     
 @api_view(['GET'],)
 def view_users_request(request,token):  #All the request that are available for a particular user
@@ -137,8 +140,8 @@ def delete_users_requests(request,token,request_id):
     re = Request.objects.get(id = request_id)
     if re.placer == user_prof:
         re.delete()
-        return JsonResponse('request Deleted',safe = False)
-    return JsonResponse('You should try to delete your own request',safe = False)
+        return JsonResponse({'msg':'request Deleted'},safe = False)
+    return JsonResponse({'msg':'You should try to delete your own request'},safe = False)
 
 @api_view(['DELETE'],)
 def delete_users_notifications(request,token,notification_id):
@@ -146,8 +149,8 @@ def delete_users_notifications(request,token,notification_id):
     no = Notifiaction.objects.get(id = notification_id)
     if no.user_prof == user_prof:
         no.delete()
-        return JsonResponse('Notification Deleted', safe=False)
-    return JsonResponse('You should try to delete your own request', safe=False)
+        return JsonResponse({'msg':'Notification Deleted'}, safe=False)
+    return JsonResponse({'msg':'You should try to delete your own request'}, safe=False)
 
 @api_view(['PUT'],)
 def updateshop(request,token,shop_id):
@@ -157,9 +160,9 @@ def updateshop(request,token,shop_id):
         data = JSONParser().parse(request)
         msg = updatechanges(data['opening_time'],data['closing_time'],shop)
         if msg is None:
-            return JsonResponse('Updated successfully',safe = False)
+            return JsonResponse({'msg':'Updated successfully'},safe = False)
         return JsonResponse(msg,safe = False)
-    return JsonResponse('You do not have permissions to do this',safe = False)    
+    return JsonResponse({'msg':'You do not have permissions to do this'},safe = False)    
 
 
 
