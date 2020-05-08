@@ -1,32 +1,73 @@
-{% include 'socialdistancing/header.html' %}    
+{% include 'socialdistancing/header.html' %}
 {% if messages %}
 {% for message in messages %}
-<div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}" role="alert">{{ message }}</div>
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <strong>{{message}}</strong> You should check in on some of those fields below.
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
 {% endfor %}
 {% endif %}
 
-{% if flag %}
-    <form method='POST' >
+    {% if flag %}
+    <h1 style="text-align: center;color:#fff" >Enter your Shop details:- </h1>
+
+
+    <form method='POST' class="fm">
         {% csrf_token %}
-        <input type="text"  name="shop_name"      placeholder = "Enter your shop name"> <br> <br> <br>
-        <input type="time"  name="opening_time"   placeholder= "Enter Your Shop's Opening time"> 
-        <label>Enter Your Shop's Opening time</label> <br> <br> <br>
-        <input type="time"  name="closing_time"   placeholder="Enter Your Shop's Closing time"> 
-        <label>Enter your shop's closing time</label> <br> <br> <br>
-        <input type="text"  name="location"       placeholder='Enter your location' id=""> <br> <br> <br>
-        <input type="radio" name="shop_type"      value="Grocery" id=""> Grocery <br> <br> <br>
-        <input type="radio" name="shop_type"      value="Medical-Store" id=""> Medical-Store <br> <br> <br>
-        <input type="radio" name="shop_type"      value="Food" id=""> Food <br> <br> <br>
-        <input type="submit" value="Submit">
+        <ul>
+            <li>
+                <input type="text" name="shop_name" placeholder="Enter your shop name"> 
+            </li>
+            <li>
+                <input class="" type="time"  name="opening_time"  data-toggle="tooltip" title="Enter Your Shop's Opening time" data-placement="auto"> 
+                
+            </li>
+            <li>
+                <input class="" type="time" name="closing_time" placeholder="Enter Your Shop's Closing time" data-toggle="tootltip" data-placement="auto" title="Enter Your Shop's closing time"> 
+               
+        
+            </li>
+            <li>
+                <input  type="text"  name="location" placeholder='Enter your location'  id=""> 
+
+            </li>
+            <li>
+                <input type="radio" name="shop_type" value="Grocery" id="f-option"><label for="f-option">Grocery</label>  <br> <br> <br>
+                <div class="check"></div>
+            </li>
+            <li>
+                <input type="radio" name="shop_type" value="Medical-Store" id="s-option"> <label for="s-option">Medical-Store</label>  <br> <br> <br>
+                <div class="check"></div>
+            </li>
+            <li>
+                <input type="radio" name="shop_type" value="Food" id="t-option"> <label for="t-option">Food</label>  <br> <br> <br>
+                <div class="check"></div>
+            </li>
+            <li>
+                <input class="btn btnx" type="submit" value="Submit">
+            </li>
+        </ul>
     </form>
 
-{% else %}
-    <form  method='POST'>
+    {% else %}
+    <h1 style="text-align: center;color:#fff">Change Your Shop's Timing:- </h1>
+    <form method='POST' class="fm">
         {% csrf_token %}
-        <input type="time"  name="opening_time"   placeholder= "Enter Your Shop's Opening time">  <label for="">Enter Your Shop's opening Time</label> <br> <br> 
-        <input type="time"  name="closing_time"   placeholder="Enter Your Shop's Closing time">  <label for="">Enter Your Shop's closing Time</label>
-    <br> <br> <br>    <input type="submit" value="Submit">
+        <ul>
+            <li>
+                <input type="time" name="opening_time"data-toggle="tootltip" data-placement="auto" title="Enter Your Shop's opening time">
+            </li>
+            <li>
+                <input type="time" name="closing_time"data-toggle="tootltip" data-placement="auto" title="Enter Your Shop's closing time">
+            </li>
+            <li>
+                <button class="btn btn-lg btn-warning" type="submit" value="Submit">Submit</button>
+            </li>
+        </ul>
     </form>
-{% endif %}
+    {% endif %}
+
 
 {% include 'socialdistancing/footer.html' %}

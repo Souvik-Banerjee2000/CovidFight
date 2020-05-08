@@ -1,17 +1,25 @@
-{% include 'socialdistancing/header.html' %}    
+{% include 'socialdistancing/header.html' %}
 {% if requests %}
-<hr>
+<div class="container2">
     {% for re in requests %}
 
-<hr>
-    <h2>Expected Going Time:-{{re.expected_going_time}} </h2>
-    <h2> Expected Leaving Time :-{{re.expected_leaving_time}} </h2>
-    <h2>{{re.shop_name.shop_name}}</h2>
-    <a href='delete/{{re.id}}/'>Delete</a>
-{% endfor %}
-{% else %}
-You have not placed any requests
-{% endif %}
-<hr>
+    <hr>
+    <h1>{{re.shop_name.shop_name}}</h1>
+    <br><br>
+    <h4>Expected Going Time:-{{re.expected_going_time}} </h4>
+    <br><br>
+    <h4> Expected Leaving Time :-{{re.expected_leaving_time}} </h4>
+    <br><br>
+    <a href='delete/{{re.id}}/'class="btn btn-danger">Delete</a>
+    <br><br>
+    {% endfor %}
+    <hr>
+    {% else %}
+    <span> 
+        <i><strong><u> Oops! Nothing got caught </u></strong></i>
+    </span>
+    {% endif %}
+    
+</div>
 
 {% include 'socialdistancing/footer.html' %}

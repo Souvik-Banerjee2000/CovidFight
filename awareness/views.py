@@ -47,32 +47,27 @@ def viewreply(request,id):
     }
     return render(request,'awareness/showreply.html',context)
 
-@isDoctor    
-def upvote(request,id,pk):
+
+@isDoctor
+def upvote(request, id, pk):
     post = Post.objects.get(id=id)
     replies = Answer.objects.filter(post=post)
-    for reply in replies:
-        if reply.id == pk:
-            break
-    reply.upvote+=1
+    reply = replies.get(id=pk)
+    reply.upvote += 1
     reply.save()
-
     messages.success(request, 'Upvote Placed succesfully')
     return redirect('/awareness')
 
 
-@isDoctor    
-def downvote(request,id,pk):
-    post = Post.objects.get(id = id)
-    replies = Answer.objects.filter(post = post)
-    for reply in replies:
-        if reply.id == pk:
-            break
-    reply.downvote+=1
+@isDoctor
+def downvote(request, id, pk):
+    post = Post.objects.get(id=id)
+    replies = Answer.objects.filter(post=post)
+    reply = replies.get(id=pk)
+    reply.downvote += 1
     reply.save()
-    messages.success(request,'Downvote Placed succesfully')
+    messages.success(request, 'Downvote Placed succesfully')
     return redirect('/awareness')
-
 
 def searchbypostname(request):
     post_name=request.GET['postname']

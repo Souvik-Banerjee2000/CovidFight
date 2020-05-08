@@ -8,6 +8,7 @@ from django.contrib import messages
 from .utils import save,updatechanges,saveRequest,refractorHour,refractorMinute
 from django.contrib.auth.decorators import login_required
 import datetime
+from django.utils.datastructures import MultiValueDictKeyError
 # Create your views here.
 
 def allshops(request):
@@ -22,13 +23,18 @@ def searchbyLocation(request):
     }
     return render(request,'socialdistancing/search.html',context)
 
+
 def searchbyType(request):
-    search = request.POST['search']
+    try:
+        search = request.POST['search']
+    except MultiValueDictKeyError:
+        return render(request, 'socialdistancing/search.html')
     shops = Shop.objects.filter(shop_type__icontains=search)
     context = {
         'shops': shops,
     }
-    return render(request, 'socialdistancing/search.html',context)
+    return render(request, 'socialdistancing/search.html', context)
+
 
 
 @isShopkeeper

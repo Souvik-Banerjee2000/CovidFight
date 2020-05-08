@@ -1,41 +1,94 @@
-{% include 'socialdistancing/header.html' %}    
+{% load static %}
+
+{% include 'socialdistancing/header.html' %}
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong>{{message}}</strong> You should check in on some of those fields below.
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+{% endfor %}
+{% endif %}
 
 
-    {% if messages %}
-    {% for message in messages %}
-        <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}" role="alert">{{ message }}</div>
-    {% endfor %}
-    {% endif %}
-    <a href="createshop/" class="btn btn-primary btn-lg">Create Shop</a>
-    <a href="updateshop/" class="btn btn-primary btn-lg">Update Shop</a> 
-    <a href="notification/" class="btn btn-primary btn-lg"> See all Notifiactions </a>
-    <a href="viewrequests/" class="btn btn-primary btn-lg">ViewRequests </a>
-    <br> <br>
 
-<br> <br>
-<form method = 'POST' action = 'searchbyLocation' > 
+
+
+<nav class="navbar navbar-expand-lg navbar-dark ">
+    <a class="navbar-brand" style="font-size:30px;" href="#">SocialDistancing</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link btn-lg" href="createshop/">CreateShop</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link btn-lg" href="updateshop/">UpdateShop</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link btn-lg" href="notification/">Notifications</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link btn-lg" href="viewrequests/">ViewRequests</a>
+            </li>
+        </ul>
+        <form method='POST' action='searchbyLocation' class="form-inline my-2 my-lg-0">
+            {% csrf_token %}
+            <input class="form-control mr-sm-2" type="text" name="search" id="" placeholder="SearchByLocation">
+            <button class="btn btnx my-2 my-sm-0" type="submit">Submit</button>
+        </form>
+
+    </div>
+</nav>
+
+<form method='POST' action='searchbyType' class="fm">
     {% csrf_token %}
-    <input type="text" name="search" id="" placeholder="SearchByLocation">
-    <input type="submit" value="Submit">
+    <h2>Search By shop type</h2>
+    <ul>
+        <li>
+            <input type="radio" name="search" value=Grocery id="f-option"> <label style="font-size: 16px;"
+                for="f-option">Grocery</label>
+            <div class="check"></div>
+        </li>
+        <li>
+            <input type="radio" name="search" value=Medical-Store id="s-option"><label style="font-size: 16px;"
+                for="s-option">Medical-Store</label>
+            <div class="check"></div>
+        </li>
+        <li>
+            <input type="radio" name="search" value="Food" id="t-option"><label style="font-size: 16px;"
+                for="t-option">Food</label>
+            <div class="check"></div>
+        </li>
+        <input class="btn btn-lg btnx" type="submit" value="Submit">
+    </ul>
 </form>
-<form method='POST' action = 'searchbyType'>
-    {% csrf_token %}
-    <input type="radio" name="search" value=Grocery id="" > Grocery
-    <input type="radio" name="search" value = Medical-Store id=""> Medical-Store
-    <input type="radio" name="search"  value= "Food" id=""> Food
-    <input type="submit" value="Submit">
-</form>
-  
+
+
+<div class="container2">
     {% for shop in shops %}
     <hr>
-        <h1>{{shop.shop_name}}</h1>
-        <h1> Owner Name :-  {{shop.owner.user.username}} </h1>
-        <h2> Shop Location:-  {{shop.location}} </h2>
-        <h2> Opening Time:- {{shop.opening_time}} </h2>
-        <h2> Closing Time:- {{shop.closing_time}} </h2>
-        <h2> Type :- {{shop.shop_type}} </h2>
-        <a href="placerequest/{{shop.id}}/"> PlaceRequest </a>
+    <h1>{{shop.shop_name}}</h1>
+    <h1> Owner Name :- {{shop.owner.user.username}} </h1>
+    <br> <br>
+    <h4> Shop Location:- {{shop.location}} </h4>
+    <br> <br>
+    <h4> Opening Time:- {{shop.opening_time}} </h4>
+    <br> <br>
+    <h4> Closing Time:- {{shop.closing_time}} </h4>
+    <br> <br>
+    <h4> Type :- {{shop.shop_type}} </h4>
+    <br> <br>
+    <a href="placerequest/{{shop.id}}/" class="btn btnx"> PlaceRequest </a>
+    <br><br>
     {% endfor %}
     <hr>
+</div>
 
 {% include 'socialdistancing/footer.html' %}

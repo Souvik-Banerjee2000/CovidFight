@@ -1,6 +1,12 @@
+{% include 'awareness/header.html' %}
 
-<form method="POST">
-    {% csrf_token %}
-    <input type="text" name="answer" id="" placeholder="Enter Answer"> <label for="">Enter Answer</label> <br> <br>
-    <input type="submit" value="Submit">
-</form>
+<div style="margin-top: 5rem;">
+    <div class="container">
+        <form method="POST">
+            {% csrf_token %}
+            <label for="">Enter Answer</label> <br>
+            <input class="search-box" type="text" name="answer" id="" placeholder="Enter Answer"> <br><br>
+            <input class="btnn1" type="submit" value="Submit">
+        </form>
+    </div>
+</div>

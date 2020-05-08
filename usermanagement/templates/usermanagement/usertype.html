@@ -1,21 +1,26 @@
+{% load static %}
+
 {% include 'usermanagement/header.html' %}
-    {% if user.is_authenticated %}
-        {%  if user_prof.usertype %}
-            {{user_prof.usertype}}
-        {%else%}
-            {{user_prof}}
-            <form method = 'POST'>
-                {% csrf_token %}
-                    <input type="radio" name="user_type" id="" value = "Shopkeeper"> Shopkeeper
-                    <input type="radio" name="user_type" id="" value="Doctor"> Doctor
-                    <input type="radio" name="user_type" id="" value="Normal_User"> Normal_User
-                    <input type="submit" value="Submit">
-            </form>
-        {%endif%}
-    {% else %}
-    <h1>Login First</h1>
+{% if user.is_authenticated %}
+{%  if user_prof.usertype %}
+{{user_prof.usertype}}
+{%else%}
+
+<!-- <link rel="stylesheet" type="text/css" href="{% static 'css/usertype.css' %}"> -->
+
+    <form class="loginbox" method='POST'>
+        {% csrf_token %}
+    
+        <input type="radio" name="user_type" id="f-option" value="Shopkeeper"> Shopkeeper <br>
+        <input type="radio" name="user_type" id="" value="Doctor"> <label>Doctor</label> <br>
+        <input type="radio" name="user_type" id="" value="Normal_User"> <label>Normal_User</label>
+        <input class="btnn6" type="submit" value="Submit">
+    </form>
+
+{%endif%}
+{% else %}
+<h1>Login First</h1>
 
 
-    {% endif %}
-{% include 'usermanagement/footer.html' %}    
-   
+{% endif %}
+{% include 'usermanagement/footer.html' %}

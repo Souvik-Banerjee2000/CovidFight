@@ -1,33 +1,50 @@
-{% include 'socialdistancing/header.html' %}    
+{% include 'socialdistancing/header.html' %}
 {% if requests %}
 {% for re in requests %}
-<hr>
-<h1> Requested By -  {{re.placer.user.username}} </h1>
-<h2> The Expected Reaching Time is {{re.expected_going_time}} </h2>
-<h2> The expected Leaving time is:- {{re.expected_leaving_time}}</h2>
+<div class="container2">
+    <hr>
+    <h1> Requested By - {{re.placer.user.username}} </h1>
+    <br> <br>
+    <h4> The Expected Reaching Time is {{re.expected_going_time}} </h4>
+    <br> <br>
+    <h4> The expected Leaving time is:- {{re.expected_leaving_time}}</h4>
+    <br> <br>
 
-<form action= "accept_or_decline/{{re.id}}/" method="POST"> 
+    <form action="accept_or_decline/{{re.id}}/" method="POST" class="fm">
 
- {% csrf_token %} 
-<input type = "radio" name="accept_or_declined" value="accepted"> <label> Accept </label>  <br> <br>
+        {% csrf_token %}
+        <ul>
+            <li>
+                <input type="radio" name="accept_or_declined" id = 'f-option' value="accepted"> <label for="f-option"> Accept </label>
+                <div class="check"></div> 
+            </li>
+            <li>
+                <input type="radio" name="accept_or_declined" value="declined" id="s-option"> <label for="s-option"> Decline </label> 
+                <div class="check"></div>
+            </li>
+            <li>
+                <input type="text" name="message" placeholder='Enter your message for the request placer'>
+            </li>
+            <li>
+                <input type="submit" value="Submit" class="btn btn-lg btnx" style="border-radius: 30px;">
+            </li>
+        </ul>
 
-<input type = "radio" name="accept_or_declined" value="declined"> <label> Decline </label>  <br> <br>
-
-<input  type = "text" name="message" placeholder= 'Enter your message for the request placer' >  <br> <br>
-<input type="submit" value="Submit">
 
 
+    </form>
 
-</form>
 
-
- <br> <br>
+    <br> <br>
+</div>
 {% endfor %}
 
 <hr>
 
 {% else %}
-No request have been placed till now 
+<span> 
+   <i><strong><u> Oops! Nothing got caught </u></strong></i>
+</span>
 {% endif %}
 
 {% include 'socialdistancing/footer.html' %}

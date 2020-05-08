@@ -1,13 +1,31 @@
-{% include 'socialdistancing/header.html' %}    
-{% for shop in shops %}
+{% load static %}
 
-		<h1> Shop Name :- <a href = "changeshopdetails/{{shop.id}}/" > {{shop.shop_name}} </a> </h1>
-        <h2> Shop Location:-  {{shop.location}} </h2>
-        <h2> Opening Time:- {{shop.opening_time}} </h2>
-        <h2> Closing Time:- {{shop.closing_time}} </h2>
-        <h2> Type :- {{shop.shop_type}} </h2>
-        <a href="viewrequests/{{shop.id}}/" > See All Requests </a>
-        
-{% endfor %}        
+{% include 'socialdistancing/header.html' %}
+
+{% if shops %}
+    {% for shop in shops %}
+    <hr>
+    <div class="container2">
+        <h1> Shop Name :- </h1> <a href="changeshopdetails/{{shop.id}}/" class="btn-sm btn-warning">{{shop.shop_name}} </a> 
+        <br> <br>
+        <h4> Shop Location:- {{shop.location}} </h4>
+        <br> <br>
+        <h4> Opening Time:- {{shop.opening_time}} </h4>
+        <br> <br>
+        <h4> Closing Time:- {{shop.closing_time}} </h4>
+        <br> <br>
+        <h4> Type :- {{shop.shop_type}} </h4>
+        <br> <br>
+        <a href="viewrequests/{{shop.id}}/" class="btn-lg btnx"> See All Requests </a>
+        <br> <br>
+    
+        <hr> 
+    </div>
+    {% endfor %}
+{% else %}
+<span> 
+   <i><strong><u> Oops! Nothing got caught </u></strong></i>
+</span>
+{% endif %}
 
 {% include 'socialdistancing/footer.html' %}

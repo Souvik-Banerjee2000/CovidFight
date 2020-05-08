@@ -1,20 +1,21 @@
+{% load static %}
 {% include 'usermanagement/header.html' %}
 {% if flag %}
-    <form action="" method ="POST">
-    
-        {% csrf_token %}
-        <input type="text" name="username" placeholder="username"> <br> <br>
-        <input type="email" name="email" placeholder = "Enter your Email Address" > <br> <br>
-        <input type="password" name="password" placeholder="password"> <br> <br>
-        <input type="submit" value="submit">
-    </form>
+<form class="loginbox" action="" method="POST">
+    {% csrf_token %}
+    <img src="{% static 'images/img23.png' %}" class="image">
+    <input type="text" name="username" placeholder="username"> <br> <br>
+    <input type="email" name="email" placeholder="Enter your Email Address"> <br> <br>
+    <input type="password" name="password" placeholder="password"> <br> <br>
+    <input type="submit" value="submit">
+</form>
 {% else %}
-<form action="" method ="POST">
-    
-        {% csrf_token %}
-        <input type="text" name="username" placeholder="username"> <br> <br>
-        <input type="password" name="password" placeholder="password"> <br> <br>
-        <input type="submit" value="submit">
-    </form>
+<form class="loginbox" action="" method="POST">
+    {% csrf_token %}
+    <img src="{% static 'images/img23.png' %}" class="image">
+    <input type="text" name="username" placeholder="username"> <br> <br>
+    <input type="password" name="password" placeholder="password"> <br> <br>
+    <input type="submit" value="submit">
+</form>
 {% endif %}
 {% include 'usermanagement/footer.html' %}

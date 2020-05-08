@@ -1,13 +1,25 @@
+{% load static %}
 {% include 'awareness/header.html' %}
 
-<div class="container" >
-    <div class="post" >
-    {% for reply in replies %}
-    <h2> {{reply.reply}} <br> it got {{reply.upvote}} no of upvotes and <br> {{reply.downvote}} no of downvotes <h2>
-
-    <button class="btnn3"><a href="upvote/{{reply.id}}/"> <i class="fa fa-thumbs-up" aria-hidden="true"></i><a></button>
-    <button class="btnn4"><a href="downvote/{{reply.id}}/"> <i class="fa fa-thumbs-down" aria-hidden="true"></i></a></button>
-    {% endfor %}
+{% for reply in replies %}
+<div class="container">
+    <div class="design">
+        <div class="card border-primary mb-3" style="width: 50rem;">
+            <div class="card-body">
+                <h3 class="card-subtitle mb-2 text-muted" style="font-family: 'Fira Sans Condensed', sans-serif;">
+                    {{reply.reply}}</h3>
+                <p class="card-text" style="font-family: 'Fira Sans Condensed', sans-serif;"> Upvote gets :-
+                    {{reply.upvote}}</p>
+                <p class="card-text" style="font-family: 'Fira Sans Condensed', sans-serif;"> Downpvote gets :-
+                    {{reply.downvote}}</p>
+                <h4 class="card-text"><small class="text-muted">Posted By </small></h4>
+                <a href="upvote/{{reply.id}}/" class="btnn3"><i class="fa fa-thumbs-up"
+                            aria-hidden="true"></i><a>
+                <a href="downvote/{{reply.id}}/" class="btnn4"><i class="fa fa-thumbs-down"
+                            aria-hidden="true"></i></a>
+            </div>
+        </div>
     </div>
 </div>
+{% endfor %}
 {% include 'awareness/footer.html' %}

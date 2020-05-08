@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Lemonada:wght@700&family=Ruda&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
+
+body {
+  background: #ecf0f1;
+  color: #333333;
+  margin-top: 3.5rem;
+}
+
+.navbar a {
+	font-family: 'Lemonada', cursive;
+}
+
+.navbar .nav-link {
+	font-family: 'Ruda', sans-serif;
+}
+
+.bg-steel {
+	background-color: #2c3e50;
+}
+
+img {
+	max-width: 100%;
+    max-height: 100%;
+    display: block; 
+}
+.box {
+	height: 600px;
+}
+
+.container2 {
+	position: absolute;
+  	left: 50%;
+ 	top: 90%;
+	justify-content: center;
+	transform: translate(-50%, -50%);
+}
+
+h3 {
+	font-family: 'Bangers', cursive;
+}
