@@ -26,11 +26,11 @@
                 <input class="form-control" type="text" name="title" id="" placeholder='Enter Question title'> <br> <br>
                 <div class="form-group">    
                     <div class="first-section-label">
-                        <label for="exampleInputEmail1"><u><i>Enter Description</i></u></label>
+                        <label for="exampleInputEmail1" ><u><i>Enter Description</i></u></label>
                     </div>
                     <textarea class="form-control" rows = "4" cols="30" type="text" name="description" id="" placeholder="Enter Question  Description" class="form-control"></textarea>
                 </div>
-                <input class="btn btn-primary" type="submit" value="Submit" class="btnn1">
+                <input class="btn btn-primary" type="submit" value="Submit" class="btnn1" style="font-family: 'Roboto Condensed', sans-serif;">
             </form>
     </section>
     <div class="container-fluid">
@@ -63,13 +63,13 @@
             <div class="card border-primary mb-3" style="width: 50rem; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
             transition: 0.3s;">
                 <div class="card-body">
-                    <h3 class="card-subtitle mb-2 text-muted" style="font-family: 'Fira Sans Condensed', sans-serif;">
+                    <h3 class="card-subtitle mb-2 text-muted" style="font-family: 'Roboto Condensed', sans-serif;">
                         {{post.title}}</h3>
-                    <p class="card-text" style="font-family: 'Fira Sans Condensed', sans-serif;"> {{post.description}}
+                    <p class="card-text" style="font-family: 'Roboto Condensed', sans-serif;"> {{post.description}}
                     </p>
                     <h4 class="card-text"><small class="text-muted">Posted By {{post.user.user.username}}</small></h4>
-                    <a href="answer/{{post.id}}/" class="btn btn-warning">Answer the post</a>
-                    <a href="viewreply/{{post.id}}/" class="btn btn-primary">View replies</a>
+                    <a href="answer/{{post.id}}/" class="btn btn-warning" style="font-family: 'Roboto Condensed', sans-serif;">Answer the post</a>
+                    <a href="viewreply/{{post.id}}/" class="btn btn-primary" style="font-family: 'Roboto Condensed', sans-serif;">View replies</a>
                 </div>
             </div>
         </div>
