@@ -1,9 +1,8 @@
 {% load static %}
 {% include 'awareness/header.html' %}
-<link rel="stylesheet" href="{% static 'awareness/home.css' %}">
 
 <body>
-    <div class="container">
+        <div class="container">
         {%  for message in messages %}
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
             <strong>{{message}}</strong> You should check in on some of those fields below.
@@ -14,30 +13,49 @@
         <!-- <h3> {{message}} </h3> -->
         {% endfor %}
     </div>
-    <div class="container">
-        <hr>
-        <h1>Ask Your question by putting up in the platform :- </h1>
-        <form method="POST" action='createpost/'>
-            {% csrf_token %}
-            <label for="">Enter title</label> <br>
-            <input class="search-box" type="text" name="title" id="" placeholder='Enter Question title'
-                class="search-box"> <br> <br>
-            <label for="">Enter Description</label> <br>
-            <input class="search-box" type="text" name="description" id="" placeholder="Enter Question  Description"
-                class="search-box">
-            <br> <br>
-            <input class="btnn1" type="submit" value="Submit" class="btnn1">
-            <hr>
-        </form>
-    </div>
-    <div class="container">
+<!-- <section id="overall"> -->
+    <section class="firstsection">
+            <h1 class="title">Ask Your question by putting up in the platform :- </h1>
+            <form method="POST" action='createpost/'>
+                {% csrf_token %}
+                <div class="form-group">
+                    <div class="first-section-label">
+                        <label for="exampleInputEmail1"><u><i>Enter title.</i></u></label>
+                    </div>
+                </div>
+                <input class="form-control" type="text" name="title" id="" placeholder='Enter Question title'> <br> <br>
+                <div class="form-group">    
+                    <div class="first-section-label">
+                        <label for="exampleInputEmail1"><u><i>Enter Description</i></u></label>
+                    </div>
+                    <textarea class="form-control" rows = "4" cols="30" type="text" name="description" id="" placeholder="Enter Question  Description" class="form-control"></textarea>
+                </div>
+                <input class="btn btn-primary" type="submit" value="Submit" class="btnn1">
+            </form>
+    </section>
+    <div class="container-fluid">
         <form action='searchbypostname/' method="GET">
-            <label> Enter post name</label><br>
-            <input type="text" name='postname' placeholder='Searchbypostname' class="search-box">
-            <input type="submit" class="btnn2" value="S"><br>
-            <br>
+            <section id="second-section">
+                <h1 class="big-title">Search for a post.</h1>
+            
+                <div class="form-group">
+            
+                    <label for="exampleInputEmail1">Enter post name.</label>
+            
+                    <input type="text" name="postname" class="form-control" placeholder="Search by postname" id="exampleInputEmail1"
+                        aria-describedby="emailHelp">
+            
+                    <small id="emailHelp" class="form-text text-muted">Search relevant posts and keep yourself up to date.</small>
+            
+                </div>
+                <div class="second-section-button">
+                    <button type="submit" class="btn btn-primary">Search<i class=" fab fa-searchengin"></i></button>
+                </div>
+            </section>
         </form>
     </div>
+<!-- 
+</section> -->
 
     <div class="container">
         {% for post in posts %}

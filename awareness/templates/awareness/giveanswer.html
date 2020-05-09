@@ -1,12 +1,13 @@
 {% include 'awareness/header.html' %}
 
-<div style="margin-top: 5rem;">
-    <div class="container">
         <form method="POST">
             {% csrf_token %}
-            <label for="">Enter Answer</label> <br>
-            <input class="search-box" type="text" name="answer" id="" placeholder="Enter Answer"> <br><br>
-            <input class="btnn1" type="submit" value="Submit">
+            <div class="inner">
+
+				<label class="para"for=" exampleInputEmail1">Enter answer.</label>
+
+            <input type="text" name="answer" class="form-control" placeholder="Enter your answer here." id="exampleInputEmail1" aria-describedby="emailHelp"><br><br>
+            <small id="emailHelp" class=" para1 form-text text-muted">Your answer can be seen by others.</small>
+            <input class="butt btn btn-success" type="submit" value="Submit">
         </form>
-    </div>
 </div>

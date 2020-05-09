@@ -1,0 +1,160 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@1,300&display=swap');
+h1{
+color:#fff;
+font-family: 'Roboto Condensed', sans-serif;
+}
+
+.firstsection{
+  background: url("corona5.jpg") no-repeat center center fixed;
+  background-size: contain;
+  text-align: center;
+  padding: 7% 25%;
+
+}
+
+
+.first-section-label{
+  text-align: left;
+  color:#fff;
+  font-family: 'Roboto Condensed', sans-serif;
+}
+.container-fluid{
+  margin-bottom:4%
+}
+
+#second-section{
+
+  padding: 7% 25%;
+}
+.post-name{
+  text-align: left;
+  font-family: 'Roboto Condensed', sans-serif;
+
+}
+.big-title{
+  color:#120136;
+  font-family: 'Roboto Condensed', sans-serif;
+}
+.form-group{
+  padding-top:3%;
+  padding-bottom: 3%;
+}
+.form-second{
+  padding: 3% 0;
+}
+::placeholder{
+    font-family: 'Roboto Condensed', sans-serif;
+}
+.second-section-button{
+  text-align: center;
+  font-family: 'Roboto Condensed', sans-serif;
+}
+.card-body{
+  border: solid black 2px;
+}
+
+.second-page{
+  padding: 7% 35%;
+  }
+
+  .para{
+    font-size: 2.5rem;
+    margin-bottom: 2%;
+    font-family: 'Roboto Condensed', sans-serif;
+  }
+
+
+
+ul {
+  margin: 0;
+}
+.bottom-card{
+
+  padding: 3% 5%;
+}
+.inner{
+  padding: 4%;
+
+}
+@-webkit-keyframes swing
+{
+    15%
+    {
+        -webkit-transform: translateX(5px);
+        transform: translateX(5px);
+    }
+    30%
+    {
+        -webkit-transform: translateX(-5px);
+       transform: translateX(-5px);
+    }
+    50%
+    {
+        -webkit-transform: translateX(3px);
+        transform: translateX(3px);
+    }
+    65%
+    {
+        -webkit-transform: translateX(-3px);
+        transform: translateX(-3px);
+    }
+    80%
+    {
+        -webkit-transform: translateX(2px);
+        transform: translateX(2px);
+    }
+    100%
+    {
+        -webkit-transform: translateX(0);
+        transform: translateX(0);
+    }
+}
+@keyframes swing
+{
+    15%
+    {
+        -webkit-transform: translateX(5px);
+        transform: translateX(5px);
+    }
+    30%
+    {
+        -webkit-transform: translateX(-5px);
+        transform: translateX(-5px);
+    }
+    50%
+    {
+        -webkit-transform: translateX(3px);
+        transform: translateX(3px);
+    }
+    65%
+    {
+        -webkit-transform: translateX(-3px);
+        transform: translateX(-3px);
+    }
+    80%
+    {
+        -webkit-transform: translateX(2px);
+        transform: translateX(2px);
+    }
+    100%
+    {
+        -webkit-transform: translateX(0);
+        transform: translateX(0);
+    }
+}
+.inner:hover{
+  -webkit-animation: swing 1s ease;
+        animation: swing 1s ease;
+        -webkit-animation-iteration-count: 1;
+        animation-iteration-count: 1;
+}
+.butt{
+  margin-bottom: 2%;
+}
+
+.third{
+  padding:10% 20%;
+}
+.design{
+  padding: 3%;
+}

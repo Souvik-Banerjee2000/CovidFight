@@ -1,6 +1,9 @@
 {% load static %}
 {% include 'awareness/header.html' %}
 
+<link rel="stylesheet" href="{% static 'awareness/home.css' %}">
+
+{% if replies %}
 {% for reply in replies %}
 <div class="container">
     <div class="design">
@@ -22,4 +25,9 @@
     </div>
 </div>
 {% endfor %}
+{% else %}
+<div style="font-size: larger; margin-top:auto; margin:25% 25%;background-color: wheat; width: fit-content;color:#2e2e2e "> 
+    <strong><i><u> Oops Nothing got caught</u> </i></strong>
+</div>
+{% endif %}
 {% include 'awareness/footer.html' %}
