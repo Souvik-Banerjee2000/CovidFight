@@ -36,7 +36,7 @@ def save(user_prof,shop_name,location,shop_type,closing_time,opening_time):
         closing_time = datetime.time(closing_hour,closing_minute)
         shop = Shop(opening_time = opening_time,closing_time  = closing_time,location = location,shop_type= shop_type,shop_name = shop_name,owner = user_prof)
         shop.save()
-        return 'Successfully saved'
+        return shop.id
 def saveRequest(user_prof,shop_id,expected_going_time,expected_leaving_time):
     expected_going_hour = refractorHour(expected_going_time)
     expected_going_minute = refractorMinute(expected_going_time)
@@ -60,8 +60,7 @@ def saveRequest(user_prof,shop_id,expected_going_time,expected_leaving_time):
     else:
         req = Request(shop_name=shop, expected_going_time=expected_going_time, expected_leaving_time = expected_leaving_time, placer = user_prof)
         req.save()
-        msg = 'request placed successfully'
-        return msg
+        return req.id
 
 def updatechanges(opening_time,closing_time,shop):
 	if checkHour(opening_time) or checkHour(closing_time):
@@ -90,3 +89,4 @@ def updatechanges(opening_time,closing_time,shop):
 		closing_time = datetime.time(closing_hour,closing_minute)
 		shop.closing_time = closing_time
 		shop.save()
+        
